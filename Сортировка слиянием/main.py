@@ -50,23 +50,27 @@ def merge_sort(nums):
 
 
 
-#записываем два файла
 
-f = open("mergeSort/mass_1")
-from random import randint
-a = merge_sort([randint(0, 4000) for i in range(2600)])
-with open('mergeSort/mass_1', 'w') as f:
-    f.write(str(a))
-
-f = open("mergeSort/mass_2")
-b = merge_sort([randint(0, 4000) for i in range(2600)])
-with open('mergeSort/mass_2', 'w') as f:
-    f.write(str(b))
 
 
 #3.2.1 внешняя сортировка (объединение. пересечение, разность, симметрич.разность)
 #для объединения
 print("3.2.1 внешняя сортировка (объединение. пересечение, разность, симметрич.разность):")
+
+#записываем два файла
+f = open("mergeSort/mass_3.2.1(1)")
+from random import randint
+a = merge_sort([randint(0, 4000) for i in range(2600)])
+with open('mergeSort/mass_3.2.1(1)', 'w') as f:
+    f.write(str(a))
+
+f = open("mergeSort/mass_3.2.1(2)")
+b = merge_sort([randint(0, 4000) for i in range(2600)])
+with open('mergeSort/mass_3.2.1(2)', 'w') as f:
+    f.write(str(b))
+
+#выполняем остальное задание
+
 start = time.time()
 c1 = a + b
 c1 = merge_sort(list(c1))
@@ -100,8 +104,8 @@ end = time.time() - start
 print("time for 4th " + str(end) + " sec")
 
 
-f = open("mergeSort/mass_3")
-with open('mergeSort/mass_3', 'w') as f:
+f = open("mergeSort/mass_3.2.1")
+with open('mergeSort/mass_3.2.1', 'w') as f:
     f.write( str(c1)+ "\n" + str(c2) + "\n"
              + str(c3) + "\n" + str(c4))
 
