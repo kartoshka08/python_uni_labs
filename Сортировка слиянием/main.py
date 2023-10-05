@@ -66,7 +66,7 @@ with open('mergeSort/mass_2', 'w') as f:
 
 #3.2.1 внешняя сортировка (объединение. пересечение, разность, симметрич.разность)
 #для объединения
-
+print("3.2.1 внешняя сортировка (объединение. пересечение, разность, симметрич.разность):")
 start = time.time()
 c1 = a + b
 c1 = merge_sort(list(c1))
@@ -104,4 +104,21 @@ f = open("mergeSort/mass_3")
 with open('mergeSort/mass_3', 'w') as f:
     f.write( str(c1)+ "\n" + str(c2) + "\n"
              + str(c3) + "\n" + str(c4))
-    print("All worked!")
+
+print()
+
+#3.2.2. Внутренняя сортировка.  Отсортировать два массива в один
+print("3.2.2. Внутренняя сортировка.  Отсортировать два массива в один")
+start = time.time()
+f = open("mergeSort/mass_3.2.2")
+from random import randint
+m1 = merge_sort([randint(0, 10000) for i in range(3000)])
+m2 = merge_sort([randint(0, 10000) for i in range(3000)])
+m3 = merge_sort(m1+m2)
+with open('mergeSort/mass_3.2.2', 'w') as f:
+    f.write(str(m1) + "\n" + str(m2) + "\n" + "\n" + str(m3))
+end = time.time() - start
+print("time = " + str(end) + " sec")
+
+#3.2.3. Внутренняя сортировка. Дана целочисленная квадратная матрица размером n=5000. Используя указанные методы,
+# упорядочить в ней значения по возрастанию в строках и столбцах. Определить время работы, число сравнений и перестановок.
