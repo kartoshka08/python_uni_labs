@@ -109,20 +109,53 @@ with open('mergeSort/mass_3.2.1', 'w') as f:
     f.write( str(c1)+ "\n" + str(c2) + "\n"
              + str(c3) + "\n" + str(c4))
 
-print()
 
+
+
+
+print()
 #3.2.2. Внутренняя сортировка.  Отсортировать два массива в один
 print("3.2.2. Внутренняя сортировка.  Отсортировать два массива в один")
 start = time.time()
-f = open("mergeSort/mass_3.2.2")
+f = open("mergeSort/mass_3.2.2(int)")
 from random import randint
 m1 = merge_sort([randint(0, 10000) for i in range(3000)])
 m2 = merge_sort([randint(0, 10000) for i in range(3000)])
 m3 = merge_sort(m1+m2)
-with open('mergeSort/mass_3.2.2', 'w') as f:
+with open('mergeSort/mass_3.2.2(int)', 'w') as f:
     f.write(str(m1) + "\n" + str(m2) + "\n" + "\n" + str(m3))
 end = time.time() - start
-print("time = " + str(end) + " sec")
+print("timeInt = " + str(end) + " sec")
+
+import string, random
+
+start = time.time()
+f = open("mergeSort/mass_3.2.2(str)")
+m1, m2 = ["w"], ["e"]
+for i in range(1, 2800):
+    rand = random.choice(string.ascii_letters)
+    if m1[i-1] != rand:
+        m1.append(rand)
+    else:
+        rand = random.choice(string.ascii_letters)
+        m1.append(rand)
+
+    rand = random.choice(string.ascii_letters)
+    if m2[i-1] != rand:
+        m2.append(rand)
+    else:
+        rand = random.choice(string.ascii_letters)
+        m2.append(rand)
+
+m1 = merge_sort(m1)
+m2 = merge_sort(m2)
+m3 = merge_sort(m1+m2)
+with open('mergeSort/mass_3.2.2(str)', 'w') as f:
+    f.write(str(m1) + '\n' + str(m2) + '\n' + '\n' + str(m3))
+end = time.time() - start
+print("timeStr = " + str(end) + " sec")
+
+
 print()
 #3.2.3. Внутренняя сортировка. Дана целочисленная квадратная матрица размером n=5000. Используя указанные методы,
 # упорядочить в ней значения по возрастанию в строках и столбцах. Определить время работы, число сравнений и перестановок.
