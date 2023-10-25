@@ -162,5 +162,36 @@ print()
 print("3.2.3. Внутренняя сортировка. Дана целочисленная квадратная матрица")
 start = time.time()
 
+from random import randint
+# вывод матрицы
+
+def outMatrix(matrix):
+    for i in range(0, len(matrix)):
+        for i2 in range(0, len(matrix[i])):
+            print(matrix[i][i2], end=' ')
+        print()
+
+
+# ввод матрицы
+matrix = [0] * 10
+for i in range(10):
+    matrix[i] = [randint(0, 11) for i in range(10)]
+
+
+# сортировка матриццы
+
+# сортировка строк матрицы
+for i in range(len(matrix)):
+    for j in range(len(matrix[i])):
+        matrix[i] = merge_sort(matrix[i])
+# сортировка столбцов матрицы
+for i in range(len(matrix)):
+    matrix = merge_sort(matrix)
+
+with open('mergeSort/mass_3.2.3', 'w') as f:
+    for i in range(len(matrix)):
+        f.write(str(outMatrix(matrix)))
+
+
 end = time.time() - start
 print("time = " + str(end) + " sec")
