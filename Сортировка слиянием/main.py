@@ -117,12 +117,12 @@ print()
 #3.2.2. Внутренняя сортировка.  Отсортировать два массива в один
 print("3.2.2. Внутренняя сортировка.  Отсортировать два массива в один")
 start = time.time()
-f = open("mergeSort/mass_3.2.2(int)")
+f = open("mergeSort/mass_3.2.2")
 from random import randint
 m1 = merge_sort([randint(0, 10000) for i in range(3000)])
 m2 = merge_sort([randint(0, 10000) for i in range(3000)])
 m3 = merge_sort(m1+m2)
-with open('mergeSort/mass_3.2.2(int)', 'w') as f:
+with open('mergeSort/mass_3.2.2', 'w') as f:
     f.write(str(m1) + "\n" + str(m2) + "\n" + "\n" + str(m3))
 end = time.time() - start
 print("time_3.2.2 = " + str(end) + " sec")
