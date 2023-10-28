@@ -1,3 +1,4 @@
+
 # сортировка слиянием
 import time
 
@@ -5,32 +6,45 @@ def merge(left_list, right_list):
     sorted_list = []
     left_list_index = right_list_index = 0
 
+    global comp
+    global switch
+
     # Т. к. длина списков применяется часто, создадим для удобства переменные
     left_list_length, right_list_length = len(left_list), len(right_list)
 
     for _ in range(left_list_length + right_list_length):
         if left_list_index < left_list_length and right_list_index < right_list_length:
+            comp += 1
             # Сравниваем первые элементы в начале каждого списка
             # Если 1-й элемент левого подсписка меньше, добавляем его в сортированный массив
 
             if left_list[left_list_index] <= right_list[right_list_index]:
+                comp += 1
+                switch += 1
                 sorted_list.append(left_list[left_list_index])
                 left_list_index += 1
             # Если 1-й элемент правого подсписка меньше, добавляем его в сортированный массив
             else:
+                comp += 1
+                switch += 1
                 sorted_list.append(right_list[right_list_index])
                 right_list_index += 1
 
         # Когда достигнут конец левого списка, добавляем элементы правого списка в конец результирующего списка
         elif left_list_index == left_list_length:
+            comp += 1
+            switch += 1
             sorted_list.append(right_list[right_list_index])
             right_list_index += 1
         # Когда достигнут конец правого списка, добавляем элементы левого списка в сортированный массив
         elif right_list_index == right_list_length:
+            switch += 1
+            comp += 1
             sorted_list.append(left_list[left_list_index])
             left_list_index += 1
 
     return sorted_list
+
 
 def merge_sort(nums):
     # Возвращаем список, когда он состоит из одного элемента
@@ -48,7 +62,11 @@ def merge_sort(nums):
     return merge(left_list, right_list)
 
 
+global comp
+global switch
 
+comp = 0
+switch = 0
 
 
 
@@ -78,6 +96,7 @@ start = time.time()
 c1 = a + b
 c1 = merge_sort(list(c1))
 end = time.time() - start
+print("сравнений: " + str(comp) + "    перестановок: " + str(switch))
 print("time for 1st " + str(end) + " sec")
 
 
@@ -88,6 +107,7 @@ start = time.time()
 c2 = a.intersection(b)
 c2 = merge_sort(list(c2))
 end = time.time() - start
+print("сравнений: " + str(comp) + "    перестановок: " + str(switch))
 print("time for 2nd " + str(end) + " sec")
 
 
@@ -96,6 +116,7 @@ start = time.time()
 c3 = a.difference(b)
 c3 = merge_sort(list(c3))
 end = time.time() - start
+print("сравнений: " + str(comp) + "    перестановок: " + str(switch))
 print("time for 3rd " + str(end) + " sec")
 
 
@@ -104,6 +125,7 @@ start = time.time()
 c4 = a.symmetric_difference(b)
 c4 = merge_sort(list(c4))
 end = time.time() - start
+print("сравнений: " + str(comp) + "    перестановок: " + str(switch))
 print("time for 4th " + str(end) + " sec")
 
 
@@ -128,6 +150,7 @@ m3 = merge_sort(m1+m2)
 with open('mergeSort/mass_3.2.2', 'w') as f:
     f.write(str(m1) + "\n" + str(m2) + "\n" + "\n" + str(m3))
 end = time.time() - start
+print("сравнений: " + str(comp) + "    перестановок: " + str(switch))
 print("time_3.2.2 = " + str(end) + " sec")
 
 
@@ -161,4 +184,5 @@ with open('mergeSort/mass_3.2.3', 'w') as f:
         f.write(t)
 
 end = time.time() - start
+print("сравнений: " + str(comp) + "    перестановок: " + str(switch))
 print("time_3.2.3 = " + str(end) + " sec")
