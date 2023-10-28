@@ -141,9 +141,9 @@ start = time.time()
 from random import randint
 
 # ввод матрицы
-matrix = [0] * 5000
-for i in range(5000):
-    matrix[i] = [randint(0, 100) for i in range(5000)]
+matrix = [0] * 50
+for i in range(50):
+    matrix[i] = [randint(0, 100) for i in range(50)]
 
 
 # сортировка матриццы

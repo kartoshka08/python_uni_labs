@@ -1,5 +1,10 @@
 TS_min = 32
 
+global switch
+
+comp = 0
+switch = 0
+
 
 def find_minrun(n):
    r = 0
@@ -15,6 +20,8 @@ def insertion_sort(array, left, right):
        j = i - 1
        while element < array[j] and j >= left:
            array[j + 1] = array[j]
+           global switch
+           switch += 1
            j -= 1
        array[j + 1] = element
    return array
@@ -36,22 +43,30 @@ def merge(array, l, m, r):
 
    while j < array_length2 and i < array_length1:
        if left[i] <= right[j]:
+           global comp
+           comp += 1
            array[k] = left[i]
+           global switch
+           switch += 1
            i += 1
 
        else:
+           comp += 1
            array[k] = right[j]
+           switch += 1
            j += 1
 
        k += 1
 
    while i < array_length1:
        array[k] = left[i]
+       switch += 1
        k += 1
        i += 1
 
    while j < array_length2:
        array[k] = right[j]
+       switch += 1
        k += 1
        j += 1
 
@@ -110,6 +125,7 @@ for j in range(len(b)-1):
 start = time.time()
 timsort(c1)
 end = time.time() - start
+print("сравнений: " + str(comp) + "    перестановок: " + str(switch))
 print("time for 1st " + str(end) + " sec")
 
 
@@ -126,6 +142,7 @@ for i in a:
 start = time.time()
 timsort(list(c2))
 end = time.time() - start
+print("сравнений: " + str(comp) + "    перестановок: " + str(switch))
 print("time for 2nd " + str(end) + " sec")
 
 
@@ -143,6 +160,7 @@ for i in range(len(a)-1):
 
 timsort(list(c3))
 end = time.time() - start
+print("сравнений: " + str(comp) + "    перестановок: " + str(switch))
 print("time for 3rd " + str(end) + " sec")
 
 
@@ -153,6 +171,7 @@ b = set(b)
 c4 = a.symmetric_difference(b)
 timsort(list(c4))
 end = time.time() - start
+print("сравнений: " + str(comp) + "    перестановок: " + str(switch))
 print("time for 4th " + str(end) + " sec")
 
 f = open("mergeSort/mass_3.2.1")
@@ -181,7 +200,8 @@ timsort(m3)
 with open('mergeSort/mass_3.2.2', 'w') as f:
     f.write(str(m1) + "\n" + str(m2) + "\n" + "\n" + str(m3))
 end = time.time() - start
-print("timeInt = " + str(end) + " sec")
+print("сравнений: " + str(comp) + "    перестановок: " + str(switch))
+print("time_3.2.2 = " + str(end) + " sec")
 
 
 #3.2.3. Внутренняя сортировка. Дана целочисленная квадратная матрица размером n=5000. Используя указанные методы,
@@ -192,9 +212,9 @@ start = time.time()
 from random import randint
 
 # ввод матрицы
-matrix = [0] * 5000
-for i in range(5000):
-    matrix[i] = [randint(0, 100) for i in range(5000)]
+matrix = [0] * 50
+for i in range(50):
+    matrix[i] = [randint(0, 400) for i in range(50)]
 
 
 # сортировка матриццы
@@ -212,4 +232,5 @@ with open('mergeSort/mass_3.2.3', 'w') as f:
         f.write(t)
 
 end = time.time() - start
+print("сравнений: " + str(comp) + "    перестановок: " + str(switch))
 print("time_3.2.3 = " + str(end) + " sec")
