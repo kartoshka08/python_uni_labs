@@ -125,35 +125,8 @@ m3 = merge_sort(m1+m2)
 with open('mergeSort/mass_3.2.2(int)', 'w') as f:
     f.write(str(m1) + "\n" + str(m2) + "\n" + "\n" + str(m3))
 end = time.time() - start
-print("timeInt = " + str(end) + " sec")
+print("time_3.2.2 = " + str(end) + " sec")
 
-import string, random
-
-start = time.time()
-f = open("mergeSort/mass_3.2.2(str)")
-m1, m2 = ["w"], ["e"]
-for i in range(1, 2800):
-    rand = random.choice(string.ascii_letters)
-    if m1[i-1] != rand:
-        m1.append(rand)
-    else:
-        rand = random.choice(string.ascii_letters)
-        m1.append(rand)
-
-    rand = random.choice(string.ascii_letters)
-    if m2[i-1] != rand:
-        m2.append(rand)
-    else:
-        rand = random.choice(string.ascii_letters)
-        m2.append(rand)
-
-m1 = merge_sort(m1)
-m2 = merge_sort(m2)
-m3 = merge_sort(m1+m2)
-with open('mergeSort/mass_3.2.2(str)', 'w') as f:
-    f.write(str(m1) + '\n' + str(m2) + '\n' + '\n' + str(m3))
-end = time.time() - start
-print("timeStr = " + str(end) + " sec")
 
 
 print()
@@ -186,4 +159,4 @@ with open('mergeSort/mass_3.2.3', 'w') as f:
         f.write(t)
 
 end = time.time() - start
-print("time = " + str(end) + " sec")
+print("time_3.2.3 = " + str(end) + " sec")
