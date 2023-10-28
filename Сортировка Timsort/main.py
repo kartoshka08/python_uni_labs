@@ -1,102 +1,96 @@
-import sys
-class recursion_depth:
-    def __init__(self, limit):
-        self.limit = limit
-        self.default_limit = sys.getrecursionlimit()
-    def __enter__(self):
-        sys.setrecursionlimit(self.limit)
-    def __exit__(self, type, value, traceback):
-        sys.setrecursionlimit(self.default_limit)
-sys.setrecursionlimit(2600)
+TS_min = 32
+
+
+def find_minrun(n):
+   r = 0
+   while n >= TS_min:
+       r |= n & 1
+       n >>= 1
+   return n + r
+
+
+def insertion_sort(array, left, right):
+   for i in range(left + 1, right + 1):
+       element = array[i]
+       j = i - 1
+       while element < array[j] and j >= left:
+           array[j + 1] = array[j]
+           j -= 1
+       array[j + 1] = element
+   return array
+
+
+def merge(array, l, m, r):
+   array_length1 = m - l + 1
+   array_length2 = r - m
+   left = []
+   right = []
+   for i in range(0, array_length1):
+       left.append(array[l + i])
+   for i in range(0, array_length2):
+       right.append(array[m + 1 + i])
+
+   i = 0
+   j = 0
+   k = l
+
+   while j < array_length2 and i < array_length1:
+       if left[i] <= right[j]:
+           array[k] = left[i]
+           i += 1
+
+       else:
+           array[k] = right[j]
+           j += 1
+
+       k += 1
+
+   while i < array_length1:
+       array[k] = left[i]
+       k += 1
+       i += 1
+
+   while j < array_length2:
+       array[k] = right[j]
+       k += 1
+       j += 1
+
+
+def timsort(array):
+   n = len(array)
+   minrun = find_minrun(n)
+
+   for start in range(0, n, minrun):
+       end = min(start + minrun - 1, n - 1)
+       insertion_sort(array, start, end)
+
+   size = minrun
+   while size < n:
+
+       for left in range(0, n, 2 * size):
+           mid = min(n - 1, left + size - 1)
+           right = min((left + 2 * size - 1), (n - 1))
+           merge(array, left, mid, right)
+
+       size = 2 * size
 
 
 
-
-def binary_search(the_array, item, start, end):
-    if start == end:
-        if the_array[start] > item:
-            return start
-        else:
-            return start + 1
-    if start > end:
-        return start
-
-    mid = (start+end) // 2
-    if the_array[mid] < item:
-        return binary_search(the_array, item, mid + 1, end)
-    elif the_array[mid] > item:
-        return binary_search(the_array, item, start, mid - 1)
-    else:
-        return mid
-
-
-def insertion_sort(the_array):
-    l = len(the_array)
-    for index in range(1, l):
-        value = the_array[index]
-        pos = binary_search(the_array, value, 0, index - 1)
-        the_array = the_array[:pos] + [value] + the_array[pos:index] + the_array[index+1:]
-    return the_array
-
-def merge(left, right):
-    if left == []:
-        return right
-    if right == []:
-        return left
-    if left[0] < right[0]:
-        return [left[0]] + merge(left[1:], right)
-    return [right[0]] + merge(left, right[1:])
-
-
-def timsort(the_array):
-    runs, sorted_runs = [], []
-    l = len(the_array)
-    new_run = [the_array[0]]
-
-    for i in range(1, l):
-        if i == l-1:
-            new_run.append(the_array[i])
-            runs.append(new_run)
-            break
-        if the_array[i] < the_array[i-1]:
-            if not new_run:
-                runs.append([the_array[i-1]])
-                new_run.append(the_array[i])
-            else:
-                runs.append(new_run)
-                new_run = [the_array[i]]
-        else:
-            new_run.append(the_array[i])
-
-    for each in runs:
-        sorted_runs.append(insertion_sort(each))
-    sorted_array = []
-    for run in sorted_runs:
-        sorted_array = merge(sorted_array, run)
-    return sorted_array
-    # print(len(sorted_array))
-
-from random import randint
-
-
-# #defining the array to be sorted
-# array = [randint(0, 4000) for i in range(2501)]
-# print("The elements of the array before sorting are:")
-# print(array)
-# print(len(array))
-# print("The elements of the array after sorting are:")
-# timsort(array)
 
 import time
 #3.2.2. Внутренняя сортировка.  Отсортировать два массива в один
 print("3.2.2. Внутренняя сортировка.  Отсортировать два массива в один")
 start = time.time()
 f = open("mergeSort/mass_3.2.2")
+
 from random import randint
-m1 = timsort([randint(0, 10000) for i in range(500)])
-m2 = timsort([randint(0, 10000) for i in range(500)])
+m1 = [randint(0, 4000) for i in range(2500)]
+timsort(m1)
+m2 = [randint(0, 4000) for i in range(2500)]
+timsort(m2)
 m3 = m1+m2
-m3 = timsort(m3)
+timsort(m3)
+
 with open('mergeSort/mass_3.2.2', 'w') as f:
     f.write(str(m1) + "\n" + str(m2) + "\n" + "\n" + str(m3))
 end = time.time() - start
