@@ -12,30 +12,23 @@ def merge(left_list, right_list):
         if left_list_index < left_list_length and right_list_index < right_list_length:
             # Сравниваем первые элементы в начале каждого списка
             # Если 1-й элемент левого подсписка меньше, добавляем его в сортированный массив
-            sravnenie +=2
+
             if left_list[left_list_index] <= right_list[right_list_index]:
                 sorted_list.append(left_list[left_list_index])
                 left_list_index += 1
-                sravnenie += 1
-                perestanovka += 1
             # Если 1-й элемент правого подсписка меньше, добавляем его в сортированный массив
             else:
                 sorted_list.append(right_list[right_list_index])
                 right_list_index += 1
-                perestanovka += 1
 
         # Когда достигнут конец левого списка, добавляем элементы правого списка в конец результирующего списка
         elif left_list_index == left_list_length:
             sorted_list.append(right_list[right_list_index])
             right_list_index += 1
-            sravnenie += 1
-            perestanovka += 1
         # Когда достигнут конец правого списка, добавляем элементы левого списка в сортированный массив
         elif right_list_index == right_list_length:
             sorted_list.append(left_list[left_list_index])
             left_list_index += 1
-            sravnenie += 1
-            perestanovka += 1
 
     return sorted_list
 
