@@ -138,13 +138,12 @@ start = time.time()
 from random import randint
 
 # ввод матрицы
-matrix = [0] * 10
-for i in range(10):
-    matrix[i] = [randint(0, 11) for i in range(10)]
+matrix = [0] * 500
+for i in range(500):
+    matrix[i] = [randint(0, 100) for i in range(500)]
 
 
 # сортировка матриццы
-
     # сортировка строк матрицы
 for i in range(len(matrix)):
     for j in range(len(matrix[i])):
